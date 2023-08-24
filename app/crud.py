@@ -7,16 +7,22 @@ import schemas
 
 
 #Festival
-def get_festival(db: Session, festival_id: int):
+def get_festivals(db: Session, skip: int = 0, limit: int = 100):
     pass
 
-# Kan misschien beter opgesplitst worden in twee functies?
-def create_festival(db: Session, festival: schemas.Festival):
-    db_location = models.Location(lat = festival.locatie.lat, lon=festival.locatie.lon)
+def get_locations(db: Session, skip: int = 0, limit: int = 100):
+    pass
+
+def create_location(db: Session, location: schemas.Location):
+    db_location = models.Location(lat=location.lat, lon=location.lon, naam=location.naam)
     db.add(db_location)
     db.commit()
     db.refresh(db_location)
-    db_festival = models.Festival(naam=festival.naam, location=db_location)
+    return db_location
+
+# Kan misschien beter opgesplitst worden in twee functies?
+def create_festival(db: Session, festival: schemas.FestivalCreate):
+    db_festival = models.Festival(naam=festival.naam, location_id=festival.locatie_id)
     db.add(db_festival)
     db.commit()
     db.refresh(db_festival)

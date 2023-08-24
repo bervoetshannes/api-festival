@@ -6,12 +6,18 @@ class UserBase(BaseModel):
     email: str
 
 class Location(BaseModel):
+    naam: str
     lat: float
     lon: float
 
-class Festival(BaseModel):
+class FestivalCreate(BaseModel):
+    naam: str
+    locatie_id: int
+
+class FestivalList(BaseModel):
     naam: str
     locatie: Location
+
 
 class UserCreate(UserBase):
     password: str

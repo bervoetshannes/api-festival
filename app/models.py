@@ -15,13 +15,13 @@ class Festival(Base):
     
     id = Column(Integer, primary_key=True, autoincrement=True, index=True)
     naam = Column(String)
-    location = relationship("Location")
+    location_id = Column(Integer, ForeignKey("location.id"))
     
 class Location(Base):
     __tablename__ = "location"
     id = Column(Integer, primary_key=True, autoincrement=True, index=True)
     lat = Column(Double)
     lon = Column(Double)
-    festival_id = Column(Integer, ForeignKey("festival.id"))
+    festivals = relationship("Festival")
 
     

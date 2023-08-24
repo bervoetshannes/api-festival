@@ -59,11 +59,25 @@ def read_users(skip: int = 0, limit: int = 100, active=False, db: Session = Depe
     return users
 
 
-@app.get("/festivals/", response_model=list[schemas.Festival])
+@app.get("/festivals/", response_model=list[schemas.FestivalList])
 def read_festivals(skip: int = 0, limit: int = 100, db: Session = Depends(get_db), token: str = Depends(oauth2_scheme)):
     festivals = crud.get_festivals(db, skip=skip, limit=limit)
     return festivals
 
+@app.get("/locations/", response_model=list[schemas.Location])
+def read_locations(skip: int = 0, limit: int = 100, db: Session = Depends(get_db), token: str = Depends(oauth2_scheme)):
+    locations = crud.get_locations(db, skip=skip, limit=limit)
+    return locations
+
+@app.post("/locations/", response_model=schemas.Location)
+def create_location(location: schemas.Location, db: Session = Depends(get_db)):
+    db_location = crud.create_location(db, location=location)
+    return db_location
+
+@app.post("/festivals/", response_model=schemas.FestivalCreate)
+def create_festival(festival: schemas.FestivalCreate, db: Session = Depends(get_db)):
+    db_festival = crud.create_festival(db, festival=festival)
+    return db_festival
 
 @app.delete("/users/{user_id}/", response_model=schemas.User)
 def delete_user(user_id: int, db: Session = Depends(get_db), token: str = Depends(oauth2_scheme)):
