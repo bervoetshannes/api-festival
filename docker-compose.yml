@@ -1,6 +1,6 @@
 version: "3.9"
 services:
  backend:
-  image: r0695672/python-api-test-main
+  image: r0695672/api-festival
   ports:
     - "8000:8000"
