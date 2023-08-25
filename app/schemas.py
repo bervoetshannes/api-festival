@@ -1,4 +1,7 @@
+from typing import List
+
 from pydantic import BaseModel, Field
+
 
 class UserBase(BaseModel):
     class Config:
@@ -24,6 +27,8 @@ class FestivalList(BaseModel):
     locatie: Location
     begin_dat: str
     end_dat: str
+    users: List[UserBase]
+
     class Config:
         orm_mode=True
 
