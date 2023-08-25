@@ -79,6 +79,11 @@ def create_festival(festival: schemas.FestivalCreate, db: Session = Depends(get_
     db_festival = crud.create_festival(db, festival=festival)
     return db_festival
 
+@app.put("/festivals/{id}")
+def change_festifal():
+    return
+
+
 @app.delete("/users/{user_id}/", response_model=schemas.User)
 def delete_user(user_id: int, db: Session = Depends(get_db), token: str = Depends(oauth2_scheme)):
     db_user = crud.get_user(db, user_id)

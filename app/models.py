@@ -16,10 +16,13 @@ class Festival(Base):
     id = Column(Integer, primary_key=True, autoincrement=True, index=True)
     naam = Column(String)
     location_id = Column(Integer, ForeignKey("location.id"))
+    begin_dat = Column(String)
+    end_dat = Column(String)
     
 class Location(Base):
     __tablename__ = "location"
     id = Column(Integer, primary_key=True, autoincrement=True, index=True)
+    naam = Column(String)
     lat = Column(Double)
     lon = Column(Double)
     festivals = relationship("Festival")

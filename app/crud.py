@@ -6,12 +6,14 @@ import models
 import schemas
 
 
-#Festival
+# Festival
 def get_festivals(db: Session, skip: int = 0, limit: int = 100):
-    pass
+    return db.query(models.Location).all()
+
 
 def get_locations(db: Session, skip: int = 0, limit: int = 100):
-    pass
+    return db.query(models.Location).all()
+
 
 def create_location(db: Session, location: schemas.Location):
     db_location = models.Location(lat=location.lat, lon=location.lon, naam=location.naam)
@@ -20,9 +22,10 @@ def create_location(db: Session, location: schemas.Location):
     db.refresh(db_location)
     return db_location
 
-# Kan misschien beter opgesplitst worden in twee functies?
+
 def create_festival(db: Session, festival: schemas.FestivalCreate):
-    db_festival = models.Festival(naam=festival.naam, location_id=festival.locatie_id)
+    db_festival = models.Festival(naam=festival.naam, location_id=festival.locatie_id, begin_dat=festival.begin_dat,
+                                  end_dat=festival.end_dat)
     db.add(db_festival)
     db.commit()
     db.refresh(db_festival)
