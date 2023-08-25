@@ -87,6 +87,7 @@ Bij het slot wordt een authenticatie gevraagd.
 Hier ziet u mijn opgebouwde Dockerfile hoe deze wordt opgebouwd
 
 
+
 ## docker-compose
 Met docker-compose builden we onze image vanzelf vanuit Docker.
 

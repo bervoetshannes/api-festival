@@ -74,3 +74,4 @@ def test_get_festival():
     assert response_dictionary["location_id"] == 1
     assert response_dictionary["begin_dat"] == "1 Jan"
     assert response_dictionary["end_dat"] == "2 Jan"
+
