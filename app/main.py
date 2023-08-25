@@ -75,6 +75,8 @@ def read_locations(skip: int = 0, limit: int = 100, db: Session = Depends(get_db
 @app.post("/locations/", response_model=schemas.Location)
 def create_location(location: schemas.Location, db: Session = Depends(get_db)):
     db_location = crud.create_location(db, location=location)
+    if db_location:
+        raise HTTPException(status_code=400, detail="Locatie bestaat al")
     return db_location
 
 @app.post("/festivals/", response_model=schemas.FestivalList)
