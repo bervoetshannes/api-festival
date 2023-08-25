@@ -4,11 +4,11 @@ from sqlalchemy.orm import Session
 import auth
 import models
 import schemas
-
+import requests
 
 # Festival
 def get_festivals(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.Location).all()
+    return db.query(models.Festival).all()
 
 
 def get_locations(db: Session, skip: int = 0, limit: int = 100):
@@ -24,7 +24,7 @@ def create_location(db: Session, location: schemas.Location):
 
 
 def create_festival(db: Session, festival: schemas.FestivalCreate):
-    db_festival = models.Festival(naam=festival.naam, location_id=festival.locatie_id, begin_dat=festival.begin_dat,
+    db_festival = models.Festival(naam=festival.naam, location_id=festival.location_id, begin_dat=festival.begin_dat,
                                   end_dat=festival.end_dat)
     db.add(db_festival)
     db.commit()
@@ -64,3 +64,12 @@ def delete_user(db: Session, user_id: int):
         db.commit()
         return user
     return None
+
+def update_festival(db: Session, festival_id: int, festival_update: schemas.FestivalUpdate):
+    db_festival = db.query(models.Festival).filter(models.Festival.id == festival_id).first()
+    if db_festival:
+        for attr, value in festival_update.dict().items():
+            setattr(db_festival, attr, value)
+        db.commit()
+    return db_festival
+

@@ -14,11 +14,10 @@ class Location(BaseModel):
 
 class FestivalCreate(BaseModel):
     naam: str
-    locatie_id: int
+    location_id: int
     begin_dat: str
     end_dat: str
-    class Config:
-        orm_mode=True
+
 
 class FestivalList(BaseModel):
     naam: str
@@ -28,6 +27,11 @@ class FestivalList(BaseModel):
     class Config:
         orm_mode=True
 
+class FestivalUpdate(BaseModel):
+    naam: str
+    location_id: int
+    begin_dat: str
+    end_dat: str
 
 class UserCreate(UserBase):
     password: str

@@ -10,6 +10,9 @@ import models
 import schemas
 from database import SessionLocal, engine
 
+#external Weather API
+import requests
+
 print("ceating tables")
 models.Base.metadata.create_all(bind=engine)
 print("tables created")
@@ -61,8 +64,8 @@ def read_users(skip: int = 0, limit: int = 100, active=False, db: Session = Depe
 
 @app.get("/festivals/", response_model=list[schemas.FestivalList])
 def read_festivals(skip: int = 0, limit: int = 100, db: Session = Depends(get_db), token: str = Depends(oauth2_scheme)):
-    festivals = crud.get_festivals(db, skip=skip, limit=limit)
-    return festivals
+    db_festivals = crud.get_festivals(db, skip=skip, limit=limit)
+    return db_festivals
 
 @app.get("/locations/", response_model=list[schemas.Location])
 def read_locations(skip: int = 0, limit: int = 100, db: Session = Depends(get_db), token: str = Depends(oauth2_scheme)):
@@ -74,14 +77,17 @@ def create_location(location: schemas.Location, db: Session = Depends(get_db)):
     db_location = crud.create_location(db, location=location)
     return db_location
 
-@app.post("/festivals/", response_model=schemas.FestivalCreate)
+@app.post("/festivals/", response_model=schemas.FestivalList)
 def create_festival(festival: schemas.FestivalCreate, db: Session = Depends(get_db)):
     db_festival = crud.create_festival(db, festival=festival)
     return db_festival
 
-@app.put("/festivals/{id}")
-def change_festifal():
-    return
+@app.put("/festivals/{festival_id}/", response_model=schemas.FestivalList)
+def update_festival(festival_id: str, festival: schemas.FestivalUpdate, db: Session = Depends(get_db), token: str = Depends(oauth2_scheme)):
+    db_festival = crud.update_festival(db, festival_id=festival_id, festival_update=festival)
+    if db_festival is None:
+        raise HTTPException(status_code=404, detail="Festival not found")
+    return db_festival
 
 
 @app.delete("/users/{user_id}/", response_model=schemas.User)
