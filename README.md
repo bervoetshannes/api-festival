@@ -64,7 +64,8 @@ Voor het einddoel van deze API gaan we de werkenemers linken aan een festival.
 Dit doen we met een extra POST functie.
 We gebruiken de user_id en festival_id om deze samen in d-een schema te zetten.
 
-![image](https://github.com/bervoetshannes/API-python/assets/47882529/72a7ab7e-b60d-4794-931c-947d7c55cd6a)
+![image](https://github.com/bervoetshannes/api-festival/assets/47882529/f15147cc-edf7-41ac-9051-7844c95e98db)
+
 
 Als de POST goed gelukt is krijgen we een extra text met de user email en het gekoppelde festival.
 
