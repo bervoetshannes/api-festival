@@ -64,7 +64,8 @@ Voor het einddoel van deze API gaan we de werkenemers linken aan een festival.
 Dit doen we met een extra POST functie.
 We gebruiken de user_id en festival_id om deze samen in d-een schema te zetten.
 
-![image](https://github.com/bervoetshannes/api-festival/assets/47882529/f15147cc-edf7-41ac-9051-7844c95e98db)
+![image](https://github.com/bervoetshannes/api-festival/assets/47882529/aa0c6c54-c894-4f5f-95b3-c8b41e873acf)
+
 
 
 Als de POST goed gelukt is krijgen we een extra text met de user email en het gekoppelde festival.
@@ -81,6 +82,11 @@ Hierboven zien we een extra gemaakte schema om de 2 ids te koppelen met elkaar.
 
 Hier staat een klein overzicht van al onze CRUD requests.
 Bij het slot wordt een authenticatie gevraagd.
+
+## Schema's
+
+![image](https://github.com/bervoetshannes/api-festival/assets/47882529/ac663436-0a13-45fb-909e-d139c7021602)
+
 
 # Docker, Docker-Compose en Okteto
 ## Docker
